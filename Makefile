@@ -19,7 +19,11 @@ SOURCES_MOCK = MockCompass.cpp
 HEADERS_MOCK = MockCompass.h
 FILE_MOCK = MockCompass.o
 
-FILES = $(FILE_COMPASS) $(FILE_MOCK)
+SOURCES_HMC = HMC6343.cpp
+HEADERS_HMC = HMC6343.h
+FILE_HMC = HMC6343.o
+
+FILES = $(FILE_COMPASS) $(FILE_MOCK) $(FILE_HMC)
 
 all : $(FILES)
 
@@ -28,6 +32,9 @@ $(FILE_COMPASS) : $(SOURCES_COMPASS) $(HEADERS_COMPASS)
 
 $(FILE_MOCK) : $(SOURCES_MOCK) $(HEADERS_MOCK)
 	$(CC) $(SOURCES_MOCK) $(FLAGS) $(LIBS) -c -o $(FILE_MOCK)
+
+$(FILE_HMC) : $(SOURCES_HMC) $(HEADERS_HMC)
+	$(CC) $(SOURCES_HMC) $(FLAGS) $(LIBS) -c -o $(FILE_HMC)
 
 test : $(SOURCES) $(HEADERS) ../catch.hpp testCompass.cpp
 	$(CC) $(SOURCES) testCompass.cpp $(LIBS) -o test
