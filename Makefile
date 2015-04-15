@@ -23,7 +23,11 @@ SOURCES_HMC = HMC6343.cpp
 HEADERS_HMC = HMC6343.h
 FILE_HMC = HMC6343.o
 
-FILES = $(FILE_COMPASS) $(FILE_MOCK) $(FILE_HMC)
+SOURCES_UTIL = Utility.cpp
+HEADERS_UTIL  = Utility.h
+FILE_UTIL  = Utility.o
+
+FILES = $(FILE_COMPASS) $(FILE_MOCK) $(FILE_HMC) $(FILE_UTIL)
 
 all : $(FILES)
 
@@ -35,6 +39,9 @@ $(FILE_MOCK) : $(SOURCES_MOCK) $(HEADERS_MOCK)
 
 $(FILE_HMC) : $(SOURCES_HMC) $(HEADERS_HMC)
 	$(CC) $(SOURCES_HMC) $(FLAGS) $(LIBS) -c -o $(FILE_HMC)
+
+$(FILE_UTIL) : $(SOURCES_UTIL) $(HEADERS_UTIL)
+	$(CC) $(SOURCES_UTIL) $(FLAGS) $(LIBS) -c -o $(FILE_UTIL)
 
 test : $(SOURCES) $(HEADERS) ../catch.hpp testCompass.cpp
 	$(CC) $(SOURCES) testCompass.cpp $(LIBS) -o test
