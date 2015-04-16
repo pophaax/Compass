@@ -48,6 +48,9 @@ $(FILE_UTIL) : $(SOURCES_UTIL) $(HEADERS_UTIL)
 
 test : $(SOURCES) $(HEADERS) ../catch.hpp testCompass.cpp
 	$(CC) $(SOURCES) testCompass.cpp $(LIBS) -o test
+	
+example : $(SOURCES) $(HEADERS) example.cpp
+	$(CC) $(SOURCES) example.cpp $(LIBS) -o example
 
 clean :
 	rm -f $(FILES)

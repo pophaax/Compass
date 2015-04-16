@@ -8,10 +8,11 @@
 #include "Compass.h"
 #include "MockCompass.h"
 
+
 Compass::Compass() {
 
 }
-Compass::Compass(MockCompass mc) {
+Compass::Compass(Compass mc) {
 	m_compass = mc;
 	m_heading = 0;
 }
