@@ -12,7 +12,7 @@
 Compass::Compass() {
 
 }
-Compass::Compass(Compass mc) {
+Compass::Compass(MockCompass mc) {
 	m_compass = mc;
 	m_heading = 0;
 }
