@@ -4,7 +4,7 @@
 #include <stdint.h> // uint8_t
 
 
-#define DEFAULT_I2C_ADDRESS 0x32
+#define DEFAULT_I2C_ADDRESS 0x19
 
 // HMC6343 Registers
 #define REG_SLAVE_ADDRESS 0x00
