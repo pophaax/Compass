@@ -50,7 +50,17 @@ int HMC6343::getHeading()
 	return m_heading;
 }
 
-void HMC6343::readHeading()
+int HMC6343::getPitch()
+{
+	return m_pitch;
+}
+
+int HMC6343::getRoll()
+{
+	return m_roll;
+}
+
+void HMC6343::readValues()
 {
 	const int transferSize = 6;
 	// head(MSB/LSB), pitch(MSB/LSB), roll(MSB/LSB)

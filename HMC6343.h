@@ -24,8 +24,14 @@ public:
 	// returns m_heading
 	int getHeading();
 
+	// returns m_heading
+	int getPitch();
+
+	// returns m_heading
+	int getRoll();
+
 	// read heading, pitch and roll
-	void readHeading();
+	void readValues();
 
 private:
 	// file descriptor
