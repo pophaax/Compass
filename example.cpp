@@ -6,8 +6,7 @@ int main() {
 	std::cout << "---------------" << std::endl;
     std::cout << "creating object" << std::endl;
 	HMC6343 compass;
-	std::cout << "initialization" << std::endl;
-	compass.init();
+	std::cout << "initialization" << compass.init() << std::endl;
 	std::cout << "read" << std::endl;
 	compass.readHeading();
 	std::cout << "heading:" << compass.getHeading() << std::endl;
