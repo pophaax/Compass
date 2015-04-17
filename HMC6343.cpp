@@ -74,8 +74,8 @@ void HMC6343::readValues()
 	}
 
 	m_heading = Utility::combineBytes(postHeadingData[0], postHeadingData[1]);
-	m_pitch = Utility::combineBytes(postHeadingData[2], postHeadingData[3]);
-	m_roll = Utility::combineBytes(postHeadingData[4], postHeadingData[5]);
+	m_pitch = Utility::combineBytesSigned(postHeadingData[2], postHeadingData[3]);
+	m_roll = Utility::combineBytesSigned(postHeadingData[4], postHeadingData[5]);
 }
 
 // Send a command to the HMC6343 to read a specified register of the EEPROM
