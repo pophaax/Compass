@@ -7,6 +7,7 @@
 class Utility {
 public:
 	static int combineBytes(uint8_t MSB, uint8_t LSB);
+	static int combineBytesSigned(uint8_t MSB, uint8_t LSB);
 };
 
 #endif
