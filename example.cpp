@@ -8,7 +8,7 @@ int main() {
 	HMC6343 compass;
 	std::cout << "initialization: " << compass.init() << std::endl;
 	std::cout << "read" << std::endl;
-	compass.readHeading();
+	compass.readValues();
 	std::cout << "heading: " << compass.getHeading() << std::endl;
 
 
