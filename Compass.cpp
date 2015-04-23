@@ -18,21 +18,17 @@ bool init(){
 	return compass.init();
 }
 
-
 int Compass::getHeading(){
 	return compass.getHeading();
 }
 
-
 int Compass::getPitch(){
-	return getPitch();
+	return compass.getPitch();
 }
-
 
 int Compass::getRoll(){
-	getRoll();
+	return compass.getRoll();
 }
-
 
 void Compass::readValues(){
 	readValues();
