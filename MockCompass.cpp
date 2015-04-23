@@ -9,7 +9,6 @@
 
 MockCompass::MockCompass() {
 
-
 }
 
 MockCompass::~MockCompass() {
