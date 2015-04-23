@@ -3,6 +3,7 @@
 #include <wiringPi.h> // delay
 #include <unistd.h> // close
 #include "Utility.h"
+#include <vector>
 
 
 HMC6343::HMC6343()
@@ -13,6 +14,10 @@ HMC6343::HMC6343()
 	m_heading = 0;
 	m_pitch = 0;
 	m_roll = 0;
+
+	m_magX = 0;
+	m_magY = 0;
+	m_magZ = 0;
 }
 
 HMC6343::~HMC6343()
@@ -60,23 +65,115 @@ int HMC6343::getRoll()
 	return m_roll;
 }
 
+int HMC6343::getAccel()
+{
+
+	return m_accelX;
+
+}
+
 void HMC6343::readValues()
 {
-	const int transferSize = 6;
-	// head(MSB/LSB), pitch(MSB/LSB), roll(MSB/LSB)
-	uint8_t postHeadingData[transferSize];
+		//PRE-READGENERIC STRUCTURE (IN CASE I DUN GOOFED)
 
-	wiringPiI2CWrite(m_fd, COM_POST_HEADING);
+	// const int transferSize = 6;
+	// // head(MSB/LSB), pitch(MSB/LSB), roll(MSB/LSB)
+	// uint8_t postHeadingData[transferSize];
+
+	// wiringPiI2CWrite(m_fd, COM_POST_HEADING);
+	// delay(1); // wait for processing of command
+
+	// for(int i = 0; i < transferSize; i++) {
+	// 	postHeadingData[i] = wiringPiI2CRead(m_fd);
+	// }
+
+	// m_heading = Utility::combineBytes(postHeadingData[0], postHeadingData[1]);
+	// m_pitch = Utility::combineBytesSigned(postHeadingData[2], postHeadingData[3]);
+	// m_roll = Utility::combineBytesSigned(postHeadingData[4], postHeadingData[5]);
+
+
+	std::vector<int> headingVector;
+	headingVector = readGeneric(COM_POST_HEADING);
+
+	m_heading = headingVector.at(0);
+	m_pitch = headingVector.at(1);
+	m_roll = headingVector.at(2);
+
+}
+
+void HMC6343::readMag()
+{
+	std::vector<int> magVector;
+	magVector = readGeneric(COM_POST_MAG);
+
+	m_magX = magVector.at(0);
+	m_magY = magVector.at(1);
+	m_magZ = magVector.at(2);
+}
+
+void HMC6343::readTilt()
+{
+	std::vector<int> tiltVector;
+	tiltVector = readGeneric(COM_POST_TILT);
+
+	m_pitch = tiltVector.at(0);
+	m_roll = tiltVector.at(1);
+	m_temperature = tiltVector.at(2);
+
+}
+
+void HMC6343::readAccel()
+{
+	
+
+	std::vector<int> accelVector;
+	accelVector = readGeneric(COM_POST_ACCEL);
+
+	m_accelX = accelVector.at(0);
+	m_accelY = accelVector.at(1);
+	m_accelZ = accelVector.at(2);
+}
+
+std::vector<int> HMC6343::readGeneric(uint8_t command){
+
+	const int transferSize = 6;
+	std::vector<int> returnVector;
+	// head(MSB/LSB), pitch(MSB/LSB), roll(MSB/LSB)
+	uint8_t postGenericData[transferSize];
+
+	wiringPiI2CWrite(m_fd, command);
 	delay(1); // wait for processing of command
 
 	for(int i = 0; i < transferSize; i++) {
-		postHeadingData[i] = wiringPiI2CRead(m_fd);
+		postGenericData[i] = wiringPiI2CRead(m_fd);
+		
 	}
 
-	m_heading = Utility::combineBytes(postHeadingData[0], postHeadingData[1]);
-	m_pitch = Utility::combineBytesSigned(postHeadingData[2], postHeadingData[3]);
-	m_roll = Utility::combineBytesSigned(postHeadingData[4], postHeadingData[5]);
+	returnVector.push_back( Utility::combineBytes(postGenericData[0], postGenericData[1]) );
+	returnVector.push_back( Utility::combineBytes(postGenericData[2], postGenericData[3]) );
+	returnVector.push_back( Utility::combineBytes(postGenericData[4], postGenericData[5]) );
+
+	return returnVector;
+
+
 }
+
+void HMC6343::setOrientation(uint8_t orientation)
+{
+	if (orientation == LEVEL)
+		{
+			wiringPiI2CWrite(m_fd, COM_ORIENT_LEVEL);
+		}
+	else if (orientation == SIDEWAYS)
+		{
+			wiringPiI2CWrite(m_fd, COM_ORIENT_SIDEWAYS);
+		}
+	else if (orientation == FLATFRONT)
+		{
+			wiringPiI2CWrite(m_fd, COM_ORIENT_FLATFRONT);
+		}
+}
+
 
 // Send a command to the HMC6343 to read a specified register of the EEPROM
 uint8_t HMC6343::readEEPROM(uint8_t reg)
