@@ -11,6 +11,10 @@ CC = g++
 FLAGS = -Wall -pedantic -Werror -std=c++14 
 LIBS = -lpthread -lwiringPi -lrt
 
+SOURCES_MOCK = MockCompass.cpp
+HEADERS_MOCK = MockCompass.h
+FILE_MOCK = MockCompass.o
+
 SOURCES_COMP = Compass.cpp
 HEADERS_COMP = Compass.h
 FILE_COMP = Compass.o
@@ -23,10 +27,10 @@ SOURCES_UTIL = Utility.cpp
 HEADERS_UTIL  = Utility.h
 FILE_UTIL  = Utility.o
 
-FILES = $(FILE_HMC) $(FILE_UTIL) $(FILE_COMP)
+FILES = $(FILE_HMC) $(FILE_UTIL) $(FILE_COMP) $(FILE_MOCK)
 
-SOURCES = $(SOURCES_HMC) $(SOURCES_UTIL) $(SOURCES_COMP)
-HEADERS = $(HEADERS_HMC) $(HEADERS_UTIL) $(HEADERS_COMP)
+SOURCES = $(SOURCES_HMC) $(SOURCES_UTIL) $(SOURCES_COMP) $(SOURCES_MOCK)
+HEADERS = $(HEADERS_HMC) $(HEADERS_UTIL) $(HEADERS_COMP) $(HEADERS_MOCK)
 
 $(FILE) : $(SOURCES) $(HEADERS)
 	$(CC) $(SOURCES) $(FLAGS) $(LIBS) -c -o $(FILE)
