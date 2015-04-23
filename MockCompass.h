@@ -8,7 +8,9 @@
 #ifndef COMPASS_MOCKCOMPASS_H_
 #define COMPASS_MOCKCOMPASS_H_
 
-class MockCompass {
+#include "HMC6343.h"
+
+class MockCompass:public HMC6343 {
 public:
 	MockCompass();
 	~MockCompass();
