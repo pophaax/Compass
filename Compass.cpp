@@ -14,7 +14,11 @@ Compass::Compass() {
 
 }
 
-bool init(){
+Compass::~Compass() {
+
+}
+
+bool Compass::init(){
 	return compass.init();
 }
 
