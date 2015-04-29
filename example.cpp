@@ -16,6 +16,5 @@ int main() {
 		std::cout << "heading : " << compass.getHeading() << "\t"
 				<< "pitch : " << compass.getPitch() << "\t"
 				<< "roll : " << compass.getRoll() << std::endl;
-		std::cout << std::endl;
 	}
 }
