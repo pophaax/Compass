@@ -84,7 +84,7 @@ private:
 	uint8_t readEEPROM(uint8_t reg);
 
 
-	std::vector<int> readGeneric(uint8_t command);
+	std::vector<uint8_t> readGeneric(uint8_t command);
 };
 
 #endif

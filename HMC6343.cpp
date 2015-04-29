@@ -74,88 +74,55 @@ int HMC6343::getAccel()
 
 void HMC6343::readValues()
 {
-		//PRE-READGENERIC STRUCTURE (IN CASE I DUN GOOFED)
+	std::vector<uint8_t> headingVector = readGeneric(COM_POST_HEADING);
 
-	// const int transferSize = 6;
-	// // head(MSB/LSB), pitch(MSB/LSB), roll(MSB/LSB)
-	// uint8_t postHeadingData[transferSize];
-
-	// wiringPiI2CWrite(m_fd, COM_POST_HEADING);
-	// delay(1); // wait for processing of command
-
-	// for(int i = 0; i < transferSize; i++) {
-	// 	postHeadingData[i] = wiringPiI2CRead(m_fd);
-	// }
-
-	// m_heading = Utility::combineBytes(postHeadingData[0], postHeadingData[1]);
-	// m_pitch = Utility::combineBytesSigned(postHeadingData[2], postHeadingData[3]);
-	// m_roll = Utility::combineBytesSigned(postHeadingData[4], postHeadingData[5]);
-
-
-	std::vector<int> headingVector;
-	headingVector = readGeneric(COM_POST_HEADING);
-
-	m_heading = headingVector.at(0);
-	m_pitch = headingVector.at(1);
-	m_roll = headingVector.at(2);
-
+	m_heading = Utility::combineBytes(headingVector.at(0), headingVector.at(1));
+	m_pitch = Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3));
+	m_roll = Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5));
 }
 
 void HMC6343::readMag()
 {
-	std::vector<int> magVector;
-	magVector = readGeneric(COM_POST_MAG);
+	std::vector<uint8_t> magVector = readGeneric(COM_POST_MAG);
 
-	m_magX = magVector.at(0);
-	m_magY = magVector.at(1);
-	m_magZ = magVector.at(2);
+	m_magX = Utility::combineBytes(magVector.at(0), magVector.at(1));
+	m_magY = Utility::combineBytes(magVector.at(2), magVector.at(3));
+	m_magZ = Utility::combineBytes(magVector.at(4), magVector.at(5));
 }
 
 void HMC6343::readTilt()
 {
-	std::vector<int> tiltVector;
-	tiltVector = readGeneric(COM_POST_TILT);
+	std::vector<uint8_t> tiltVector = readGeneric(COM_POST_TILT);
 
-	m_pitch = tiltVector.at(0);
-	m_roll = tiltVector.at(1);
-	m_temperature = tiltVector.at(2);
-
+	m_pitch = Utility::combineBytes(tiltVector.at(0), tiltVector.at(1));
+	m_roll = Utility::combineBytes(tiltVector.at(2), tiltVector.at(3));
+	m_temperature = Utility::combineBytes(tiltVector.at(4), tiltVector.at(5));
 }
 
 void HMC6343::readAccel()
 {
-	
+	std::vector<uint8_t> accelVector = readGeneric(COM_POST_ACCEL);
 
-	std::vector<int> accelVector;
-	accelVector = readGeneric(COM_POST_ACCEL);
-
-	m_accelX = accelVector.at(0);
-	m_accelY = accelVector.at(1);
-	m_accelZ = accelVector.at(2);
+	m_accelX = Utility::combineBytes(accelVector.at(0), accelVector.at(1));
+	m_accelY = Utility::combineBytes(accelVector.at(2), accelVector.at(3));
+	m_accelZ = Utility::combineBytes(accelVector.at(4), accelVector.at(5));
 }
 
-std::vector<int> HMC6343::readGeneric(uint8_t command){
+std::vector<uint8_t> HMC6343::readGeneric(uint8_t command){
 
 	const int transferSize = 6;
-	std::vector<int> returnVector;
+	std::vector<uint8_t> returnVector;
 	// head(MSB/LSB), pitch(MSB/LSB), roll(MSB/LSB)
-	uint8_t postGenericData[transferSize];
 
 	wiringPiI2CWrite(m_fd, command);
 	delay(1); // wait for processing of command
 
 	for(int i = 0; i < transferSize; i++) {
-		postGenericData[i] = wiringPiI2CRead(m_fd);
+		returnVector.push_back( wiringPiI2CRead(m_fd) );
 		
 	}
 
-	returnVector.push_back( Utility::combineBytes(postGenericData[0], postGenericData[1]) );
-	returnVector.push_back( Utility::combineBytes(postGenericData[2], postGenericData[3]) );
-	returnVector.push_back( Utility::combineBytes(postGenericData[4], postGenericData[5]) );
-
 	return returnVector;
-
-
 }
 
 void HMC6343::setOrientation(uint8_t orientation)
