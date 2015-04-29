@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 #include "Compass.h"
 #include "MockCompass.h"
 
@@ -16,6 +17,6 @@ int main() {
 		std::cout << "heading : " << compass.getHeading() << "\t"
 				<< "pitch : " << compass.getPitch() << "\t"
 				<< "roll : " << compass.getRoll() << std::endl;
-		delay(2000);
+		usleep(2000);
 	}
 }
