@@ -13,9 +13,9 @@ int main() {
 
 	while(true) {
 		compass.readValues();
-		std::cout << "heading\t: " << compass.getHeading() << std::endl;
-		std::cout << "pitch\t: " << compass.getPitch() << std::endl;
-		std::cout << "roll\t: " << compass.getRoll() << std::endl;
+		std::cout << "heading : " << compass.getHeading() << "\t"
+				<< "pitch : " << compass.getPitch() << "\t"
+				<< "roll : " << compass.getRoll() << std::endl;
 		std::cout << std::endl;
 	}
 }
