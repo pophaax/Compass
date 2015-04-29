@@ -10,12 +10,12 @@ int main() {
 	Compass compass;
 
 	std::cout << "initialization: " << compass.init() << std::endl;
-	std::cout << "read" << std::endl;
-	int i=0;
-	while(i++<100) {
-	compass.readValues();
-		std::cout << "heading	: " << compass.getHeading() << std::endl;
-		std::cout << "pitch		: " << compass.getPitch() << std::endl;
-		std::cout << "roll		: " << compass.getRoll() << std::endl;
+
+	while(true) {
+		compass.readValues();
+		std::cout << "heading\t: " << compass.getHeading() << std::endl;
+		std::cout << "pitch\t: " << compass.getPitch() << std::endl;
+		std::cout << "roll\t: " << compass.getRoll() << std::endl;
+		std::cout << std::endl;
 	}
 }
