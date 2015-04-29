@@ -6,14 +6,11 @@
 #include <vector>
 
 
-HMC6343::HMC6343()
+HMC6343::HMC6343() :
+	m_model(CompassModel(0,0,0))
 {
 	m_address = DEFAULT_I2C_ADDRESS;
 	m_fd = -1;
-
-	m_heading = 0;
-	m_pitch = 0;
-	m_roll = 0;
 
 	m_magX = 0;
 	m_magY = 0;
@@ -52,22 +49,21 @@ bool HMC6343::init()
 
 int HMC6343::getHeading()
 {
-	return m_heading;
+	return m_model.heading;
 }
 
 int HMC6343::getPitch()
 {
-	return m_pitch;
+	return m_model.pitch;
 }
 
 int HMC6343::getRoll()
 {
-	return m_roll;
+	return m_model.roll;
 }
 
 int HMC6343::getAccel()
 {
-
 	return m_accelX;
 
 }
@@ -76,9 +72,9 @@ void HMC6343::readValues()
 {
 	std::vector<uint8_t> headingVector = readGeneric(COM_POST_HEADING);
 
-	m_heading = Utility::combineBytes(headingVector.at(0), headingVector.at(1));
-	m_pitch = Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3));
-	m_roll = Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5));
+	m_model.heading = Utility::combineBytes(headingVector.at(0), headingVector.at(1));
+	m_model.pitch = Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3));
+	m_model.roll = Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5));
 }
 
 void HMC6343::readMag()
@@ -94,8 +90,8 @@ void HMC6343::readTilt()
 {
 	std::vector<uint8_t> tiltVector = readGeneric(COM_POST_TILT);
 
-	m_pitch = Utility::combineBytes(tiltVector.at(0), tiltVector.at(1));
-	m_roll = Utility::combineBytes(tiltVector.at(2), tiltVector.at(3));
+	m_model.pitch = Utility::combineBytes(tiltVector.at(0), tiltVector.at(1));
+	m_model.roll = Utility::combineBytes(tiltVector.at(2), tiltVector.at(3));
 	m_temperature = Utility::combineBytes(tiltVector.at(4), tiltVector.at(5));
 }
 
@@ -153,4 +149,8 @@ uint8_t HMC6343::readEEPROM(uint8_t reg)
 	data = wiringPiI2CRead(m_fd);
 
 	return data;
+}
+
+CompassModel HMC6343::getModel() {
+	return m_model;
 }

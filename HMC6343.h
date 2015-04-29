@@ -3,6 +3,7 @@
 
 #include <stdint.h> // uint8_t
 #include <vector>
+#include "../models/CompassModel.h"
 
 
 #define DEFAULT_I2C_ADDRESS 0x19
@@ -62,15 +63,16 @@ public:
 	// set orientation data for correct readings
 	void setOrientation(uint8_t orientation);
 
+	// returns model
+	CompassModel getModel();
 
 private:
 	// file descriptor
 	int m_fd;
 	uint8_t m_address;
 
-	int m_heading;
-	int m_pitch;
-	int m_roll;
+	CompassModel m_model;
+
 	int m_temperature;
 	int m_magX;
 	int m_magY; 
