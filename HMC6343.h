@@ -3,6 +3,7 @@
 
 #include <stdint.h> // uint8_t
 #include <vector>
+#include "Compass.h"
 #include "../models/CompassModel.h"
 
 
@@ -28,7 +29,7 @@
 #define SIDEWAYS 1 // X = forward, +Y = up
 #define FLATFRONT 2 // Z = forward, -X = up
 
-class HMC6343 {
+class HMC6343:public Compass{
 public:
 	HMC6343();
 	~HMC6343();
@@ -75,7 +76,7 @@ private:
 
 	int m_temperature;
 	int m_magX;
-	int m_magY; 
+	int m_magY;
 	int m_magZ;
 
 	int m_accelX;

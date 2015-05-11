@@ -8,9 +8,10 @@
 #ifndef COMPASS_MOCKCOMPASS_H_
 #define COMPASS_MOCKCOMPASS_H_
 
-#include "HMC6343.h"
+#include "Compass.h"
+#include "../models/CompassModel.h"
 
-class MockCompass:public HMC6343 {
+class MockCompass:public Compass {
 public:
 	MockCompass();
 	~MockCompass();
@@ -29,6 +30,24 @@ public:
 
 	// read values from module
 	void readValues();
+
+	// returns m_accelX
+	int getAccel();
+
+	// read tilt data
+	void readTilt();
+
+	// read magnetometer values
+	void readMag();
+
+	// read accelerometer values
+	void readAccel();
+
+	// set orientation data for correct readings
+	void setOrientation(uint8_t orientation);
+
+	// returns model
+	CompassModel getModel();
 };
 
 #endif /* COMPASS_MOCKCOMPASS_H_ */

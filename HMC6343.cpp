@@ -7,8 +7,7 @@
 
 
 HMC6343::HMC6343() :
-	m_model(CompassModel(0,0,0))
-{
+	m_model(CompassModel(0,0,0)){
 	m_address = DEFAULT_I2C_ADDRESS;
 	m_fd = -1;
 

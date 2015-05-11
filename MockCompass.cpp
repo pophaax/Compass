@@ -34,3 +34,22 @@ int MockCompass::getRoll(){
 void MockCompass::readValues(){
 
 }
+int MockCompass::getAccel(){
+	return 5;
+}
+
+void MockCompass::readTilt(){
+}
+
+void MockCompass::readMag(){
+}
+
+void MockCompass::readAccel(){
+}
+
+void MockCompass::setOrientation(uint8_t orientation){
+}
+
+CompassModel MockCompass::getModel(){
+	return CompassModel(0,0,0);
+}
