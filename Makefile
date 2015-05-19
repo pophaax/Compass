@@ -37,7 +37,7 @@ $(FILE) : $(SOURCES) $(HEADERS)
 	
 all : $(FILES)
 	
-test : $(SOURCES) $(HEADERS) ../catch.hpp testCompass.cpp
+test : $(SOURCES) $(HEADERS) $$SAILINGROBOTS_HOME/catch.hpp testCompass.cpp
 	$(CC) $(SOURCES) testCompass.cpp $(LIBS) -o test
 	
 example : $(SOURCES) $(HEADERS) example.cpp
