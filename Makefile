@@ -37,12 +37,8 @@ $(FILE) : $(SOURCES) $(HEADERS)
 	
 all : $(FILES)
 	
-test : $(SOURCES) $(HEADERS) $$SAILINGROBOTS_HOME/catch.hpp testCompass.cpp
-	$(CC) $(SOURCES) testCompass.cpp $(LIBS) -o test
-	
 example : $(SOURCES) $(HEADERS) example.cpp
 	$(CC) $(SOURCES) example.cpp $(LIBS) -o example
 
 clean :
 	rm -f $(FILES)
-	rm -f test
