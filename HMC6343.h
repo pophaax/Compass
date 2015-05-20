@@ -4,7 +4,7 @@
 #include <stdint.h> // uint8_t
 #include <vector>
 #include "Compass.h"
-#include "../models/CompassModel.h"
+#include "models/CompassModel.h"
 
 
 #define DEFAULT_I2C_ADDRESS 0x19

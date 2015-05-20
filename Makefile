@@ -9,7 +9,7 @@
 
 CC = g++
 FLAGS = -Wall -pedantic -Werror -std=c++14 
-LIBS = -lpthread -lwiringPi -lrt
+LIBS = -lpthread -lwiringPi -lrt -I$(SAILINGROBOTS_HOME)
 
 SOURCES_MOCK = MockCompass.cpp
 HEADERS_MOCK = MockCompass.h

@@ -9,7 +9,7 @@
 #define COMPASS_COMPASS_H_
 
 #include <stdint.h> // uint8_t
-#include "../models/CompassModel.h"
+#include "models/CompassModel.h"
 
 class Compass{
 public:
