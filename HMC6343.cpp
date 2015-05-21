@@ -70,8 +70,7 @@ int HMC6343::getAccel()
 void HMC6343::readValues()
 {
 	std::vector<uint8_t> headingVector = readGeneric(COM_POST_HEADING);
-
-	m_model.heading = Utility::combineBytes(headingVector.at(0), headingVector.at(1));
+	m_model.heading = (int) (Utility::combineBytes(headingVector.at(0), headingVector.at(1)))/10;
 	m_model.pitch = Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3));
 	m_model.roll = Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5));
 }
