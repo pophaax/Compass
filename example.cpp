@@ -22,9 +22,9 @@ int main() {
 				<< "pitch : " << compass->getPitch() << "\t"
 				<< "roll : " << compass->getRoll() << std::endl;
 		compHeading =
-				  cos(compass->getRoll()/2) +	( 0 * sin(compass->getRoll()/2)) + 0 	( sin(compass->getRoll()/2)) + 		( 1 * sin(compass->getRoll()/2))
-				* cos(compass->getPitch()/2) +	( 1 * sin(compass->getPitch()/2)) + 0 	( sin(compass->getPitch()/2)) + 	( 0 * sin(compass->getPitch()/2))
-				* cos(compass->getHeading()/2) +( 0 * sin(compass->getHeading()/2)) + 1 ( sin(compass->getHeading()/2)) + 	( 0 * sin(compass->getHeading()/2));
+				  (cos(compass->getRoll()/2) +	( 0 * sin(compass->getRoll()/2)) +		( 0 * sin(compass->getRoll()/2)) + 		( 1 * sin(compass->getRoll()/2)))
+				* (cos(compass->getPitch()/2) +	( 1 * sin(compass->getPitch()/2)) +		( 0 * sin(compass->getPitch()/2)) +	 	( 0 * sin(compass->getPitch()/2)))
+				* (cos(compass->getHeading()/2) +( 0 * sin(compass->getHeading()/2)) +	( 1 *  sin(compass->getHeading()/2)) + 	( 0 * sin(compass->getHeading()/2)));
 		std::cout << "compensated heading : "<<compHeading<< std::endl;
 		usleep(2000);
 	}
