@@ -46,8 +46,6 @@ $(FILE_HMC) : $(SOURCES_HMC) $(HEADERS_HMC)
 $(FILE_UTIL) : $(SOURCES_UTIL) $(HEADERS_UTIL)
 	$(CC) $(SOURCES_UTIL) $(FLAGS) $(LIBS) -c -o $(FILE_UTIL)
 
-example : $(SOURCES) $(HEADERS) example.cpp
-	$(CC) $(SOURCES) example.cpp $(LIBS) -o example
 
 clean :
 	rm -f $(FILES)
