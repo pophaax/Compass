@@ -83,6 +83,10 @@ private:
 	int m_accelY; 
 	int m_accelZ;
 
+	const unsigned int m_headingsMaxSize;
+	std::vector<float> m_headings;
+
+
 	// read a specified register of the EEPROM
 	uint8_t readEEPROM(uint8_t reg);
 

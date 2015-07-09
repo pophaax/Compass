@@ -4,10 +4,13 @@
 #include <unistd.h> // close
 #include "Utility.h"
 #include <vector>
+#include "../CV7/UtilityLibrary.h"
 
 
 HMC6343::HMC6343() :
-	m_model(CompassModel(0,0,0)){
+	m_model(CompassModel(0,0,0)),
+	m_headingsMaxSize(2)
+{
 	m_address = DEFAULT_I2C_ADDRESS;
 	m_fd = -1;
 
@@ -70,9 +73,17 @@ int HMC6343::getAccel()
 void HMC6343::readValues()
 {
 	std::vector<uint8_t> headingVector = readGeneric(COM_POST_HEADING);
-	m_model.heading = (int) (Utility::combineBytes(headingVector.at(0), headingVector.at(1)))/10;
-	m_model.pitch = Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3));
-	m_model.roll = Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5));
+
+	m_headings.push_back(
+		(Utility::combineBytes(headingVector.at(0), headingVector.at(1))) / 10.0);
+	while (m_headings.size() > m_headingsMaxSize)
+	{
+		m_headings.erase(m_headings.begin());
+	}
+
+	m_model.heading = int(UtilityLibrary::meanOfAngles(m_headings) + 0.5);
+	m_model.pitch = (Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3))) / 10;
+	m_model.roll = (Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5))) / 10;
 }
 
 void HMC6343::readMag()
