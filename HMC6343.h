@@ -31,7 +31,7 @@
 
 class HMC6343:public Compass{
 public:
-	HMC6343();
+	HMC6343(unsigned int headningBufferSize);
 	~HMC6343();
 
 	// setup for the connection between Raspberry Pi and the compass
@@ -83,7 +83,7 @@ private:
 	int m_accelY; 
 	int m_accelZ;
 
-	const unsigned int m_headingsMaxSize;
+	const unsigned int m_headningBufferSize;
 	std::vector<float> m_headings;
 
 

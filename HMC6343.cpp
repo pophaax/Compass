@@ -4,12 +4,12 @@
 #include <unistd.h> // close
 #include "Utility.h"
 #include <vector>
-#include "../CV7/UtilityLibrary.h"
+#include "CV7/UtilityLibrary.h"
 
 
-HMC6343::HMC6343() :
+HMC6343::HMC6343(unsigned int headningBufferSize) :
 	m_model(CompassModel(0,0,0)),
-	m_headingsMaxSize(2)
+	m_headningBufferSize(headningBufferSize)
 {
 	m_address = DEFAULT_I2C_ADDRESS;
 	m_fd = -1;
@@ -76,7 +76,7 @@ void HMC6343::readValues()
 
 	m_headings.push_back(
 		(Utility::combineBytes(headingVector.at(0), headingVector.at(1))) / 10.0);
-	while (m_headings.size() > m_headingsMaxSize)
+	while (m_headings.size() > m_headningBufferSize)
 	{
 		m_headings.erase(m_headings.begin());
 	}
