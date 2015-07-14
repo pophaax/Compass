@@ -2,9 +2,8 @@
 #include <wiringPiI2C.h>
 #include <wiringPi.h> // delay
 #include <unistd.h> // close
-#include "Utility.h"
 #include <vector>
-#include "CV7/UtilityLibrary.h"
+#include "utility/Utility.h"
 
 
 HMC6343::HMC6343(unsigned int headningBufferSize) :
@@ -81,7 +80,7 @@ void HMC6343::readValues()
 		m_headings.erase(m_headings.begin());
 	}
 
-	m_model.heading = int(UtilityLibrary::meanOfAngles(m_headings) + 0.5);
+	m_model.heading = int(Utility::meanOfAngles(m_headings) + 0.5);
 	m_model.pitch = (Utility::combineBytesSigned(headingVector.at(2), headingVector.at(3))) / 10;
 	m_model.roll = (Utility::combineBytesSigned(headingVector.at(4), headingVector.at(5))) / 10;
 }
