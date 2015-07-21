@@ -9,7 +9,8 @@
 #define COMPASS_MOCKCOMPASS_H_
 
 #include "Compass.h"
-#include "../models/CompassModel.h"
+
+class CompassModel;
 
 class MockCompass:public Compass {
 public:

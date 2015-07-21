@@ -6,6 +6,7 @@
  */
 
 #include "MockCompass.h"
+#include "models/CompassModel.h"
 
 MockCompass::MockCompass() {
 
