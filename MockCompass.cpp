@@ -8,6 +8,9 @@
 #include "MockCompass.h"
 #include "models/CompassModel.h"
 
+const int HEADING = 100,PITCH = 200,ROLL = 300;
+const int ACCELX = 5,ACCELY = 5,ACCELZ = 5;
+
 MockCompass::MockCompass() {
 
 }
@@ -21,22 +24,22 @@ bool MockCompass::init(){
 }
 
 int MockCompass::getHeading(){
-	return 100;
+	return HEADING;
 }
 
 int MockCompass::getPitch(){
-	return 200;
+	return PITCH;
 }
 
 int MockCompass::getRoll(){
-	return 300;
+	return ROLL;
 }
 
 void MockCompass::readValues(){
 
 }
 int MockCompass::getAccel(){
-	return 5;
+	return ACCELX;
 }
 
 void MockCompass::readTilt(){
@@ -52,5 +55,5 @@ void MockCompass::setOrientation(uint8_t orientation){
 }
 
 CompassModel MockCompass::getModel(){
-	return CompassModel(0,0,0);
+	return CompassModel(HEADING,PITCH,ROLL,ACCELX,ACCELY,ACCELZ);
 }

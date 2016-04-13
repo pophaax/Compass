@@ -79,10 +79,6 @@ private:
 	int m_magY;
 	int m_magZ;
 
-	int m_accelX;
-	int m_accelY; 
-	int m_accelZ;
-
 	const unsigned int m_headningBufferSize;
 	std::vector<float> m_headings;
 

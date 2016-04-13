@@ -7,7 +7,7 @@
 
 
 HMC6343::HMC6343(unsigned int headningBufferSize) :
-	m_model(CompassModel(0,0,0)),
+	m_model(CompassModel(0,0,0,0,0,0)),
 	m_headningBufferSize(headningBufferSize)
 {
 	m_address = DEFAULT_I2C_ADDRESS;
@@ -65,7 +65,7 @@ int HMC6343::getRoll()
 
 int HMC6343::getAccel()
 {
-	return m_accelX;
+	return m_model.accelX;
 
 }
 
@@ -107,9 +107,9 @@ void HMC6343::readAccel()
 {
 	std::vector<uint8_t> accelVector = readGeneric(COM_POST_ACCEL);
 
-	m_accelX = Utility::combineBytes(accelVector.at(0), accelVector.at(1));
-	m_accelY = Utility::combineBytes(accelVector.at(2), accelVector.at(3));
-	m_accelZ = Utility::combineBytes(accelVector.at(4), accelVector.at(5));
+	m_model.accelX = Utility::combineBytes(accelVector.at(0), accelVector.at(1));
+	m_model.accelY = Utility::combineBytes(accelVector.at(2), accelVector.at(3));
+	m_model.accelZ = Utility::combineBytes(accelVector.at(4), accelVector.at(5));
 }
 
 std::vector<uint8_t> HMC6343::readGeneric(uint8_t command){
