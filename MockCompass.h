@@ -32,8 +32,14 @@ public:
 	// read values from module
 	void readValues();
 
-	// returns m_accelX
-	int getAccel();
+	// returns accelX
+	int getAccelX();
+        
+        // returns accelY
+	int getAccelY();
+        
+        // returns accelZ
+	int getAccelZ();
 
 	// read tilt data
 	void readTilt();

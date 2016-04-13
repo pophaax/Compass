@@ -24,8 +24,12 @@ public:
 	virtual int getPitch()=0;
 	// returns m_heading
 	virtual int getRoll()=0;
-	// returns m_accelX
-	virtual int getAccel()=0;
+	// returns accelX
+	virtual int getAccelX()=0;
+        // returns accelY
+	virtual int getAccelY()=0;
+        // returns accelZ
+	virtual int getAccelZ()=0;
 	// read heading, pitch and roll
 	virtual void readValues()=0;
 	// read tilt data

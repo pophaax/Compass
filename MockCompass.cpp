@@ -38,8 +38,17 @@ int MockCompass::getRoll(){
 void MockCompass::readValues(){
 
 }
-int MockCompass::getAccel(){
+
+int MockCompass::getAccelX(){
 	return ACCELX;
+}
+
+int MockCompass::getAccelY(){
+	return ACCELY;
+}
+
+int MockCompass::getAccelZ(){
+	return ACCELZ;
 }
 
 void MockCompass::readTilt(){

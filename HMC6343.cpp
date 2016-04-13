@@ -63,10 +63,19 @@ int HMC6343::getRoll()
 	return m_model.roll;
 }
 
-int HMC6343::getAccel()
+int HMC6343::getAccelX()
 {
 	return m_model.accelX;
+}
 
+int HMC6343::getAccelY()
+{
+	return m_model.accelY;
+}
+
+int HMC6343::getAccelZ()
+{
+	return m_model.accelZ;
 }
 
 void HMC6343::readValues()

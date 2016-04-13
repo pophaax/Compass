@@ -46,8 +46,14 @@ public:
 	// returns m_heading
 	int getRoll();
 
-	// returns m_accelX
-	int getAccel();
+	// returns accelX
+	int getAccelX();
+        
+        // returns accelY
+	int getAccelY();
+        
+        // returns accelZ
+	int getAccelZ();
 
 	// read heading, pitch and roll
 	void readValues();
