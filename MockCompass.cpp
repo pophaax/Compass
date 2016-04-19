@@ -64,5 +64,5 @@ void MockCompass::setOrientation(uint8_t orientation){
 }
 
 CompassModel MockCompass::getModel(){
-	return CompassModel(HEADING,PITCH,ROLL,ACCELX,ACCELY,ACCELZ);
+	return CompassModel(HEADING,PITCH,ROLL,AccelerationModel(ACCELX,ACCELY,ACCELZ) );
 }
