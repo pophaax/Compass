@@ -116,9 +116,9 @@ void HMC6343::readAccel()
 {
 	std::vector<uint8_t> accelVector = readGeneric(COM_POST_ACCEL);
 
-	m_model.accelerationModel.accelX = Utility::combineBytes(accelVector.at(0), accelVector.at(1));
-	m_model.accelerationModel.accelY = Utility::combineBytes(accelVector.at(2), accelVector.at(3));
-	m_model.accelerationModel.accelZ = Utility::combineBytes(accelVector.at(4), accelVector.at(5));
+	m_model.accelerationModel.accelX = Utility::combineBytesSigned(accelVector.at(0), accelVector.at(1));
+	m_model.accelerationModel.accelY = Utility::combineBytesSigned(accelVector.at(2), accelVector.at(3));
+	m_model.accelerationModel.accelZ = Utility::combineBytesSigned(accelVector.at(4), accelVector.at(5));
 }
 
 std::vector<uint8_t> HMC6343::readGeneric(uint8_t command){
