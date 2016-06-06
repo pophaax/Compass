@@ -134,7 +134,7 @@ std::vector<uint8_t> HMC6343::readGeneric(uint8_t command){
 		returnVector.push_back( wiringPiI2CRead(m_fd) );
 		
 	}
-
+        delay(1);
 	return returnVector;
 }
 
